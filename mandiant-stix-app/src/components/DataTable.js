@@ -5,6 +5,7 @@ import getColumns from './DataTableColumns';
 import DataTableSearch from './DataTableSearch';
 import './DataTable.css';
 import {getConstant} from '../utils/utils';
+import logo from '../logo-imda.png';
 
 const { Title } = Typography;
 
@@ -63,34 +64,43 @@ const DataTable = (props) => {
 
     return(
         <div key='data-table'>
-            <Title level={2}>Mandiant Report on APT1</Title>
-            <DataTableSearch data={dataSource} searchByKeyword={searchByKeyword}/>
-            <Title className='second-title' level={5}>Please use the column headers to filter the data or tap on the rows to view details</Title>
-            <Table
-                columns={getColumns(filteredData)}
-                dataSource={filteredData}
-                rowClassName={'mouse-over'}
-                onRow={(record, rowIndex) => {
-                    return {
-                        onClick: event => { onRowClick(record, rowIndex) },
-                    };
-                }}
-            />
+            <div className='header'>
+              <Title level={2}>Mandiant Report on APT1</Title>
+            </div>
+            <div className='header'>
+                <img className='logo' src={logo} alt="imda_logo" />
+            </div>
+            
+            <div>
+                <DataTableSearch data={dataSource} searchByKeyword={searchByKeyword}/>
+                <Title className='second-title' level={5}>Please use the column headers to filter the data or tap on the rows to view details</Title>
+                <Table
+                    columns={getColumns(filteredData)}
+                    dataSource={filteredData}
+                    rowClassName={'mouse-over'}
+                    onRow={(record, rowIndex) => {
+                        return {
+                            onClick: event => { onRowClick(record, rowIndex) },
+                        };
+                    }}
+                />
 
-            <Drawer title="Details" placement="right" onClose={onClose} visible={drawerVisible} width={'40%'}>
-                {Object.keys(drawerData).map((key)=>{
-                    console.log('key', key)
-                    console.log('drawerData[key]', drawerData[key])
-                    if(key === 'kill_chain_phases'){
-                        return(
-                            renderKillPhase(drawerData[key])
+                <Drawer title="Details" placement="right" onClose={onClose} visible={drawerVisible} width={'40%'}>
+                    {Object.keys(drawerData).map((key)=>{
+                        console.log('key', key)
+                        console.log('drawerData[key]', drawerData[key])
+                        if(key === 'kill_chain_phases'){
+                            return(
+                                renderKillPhase(drawerData[key])
+                            )
+                        }
+                        return (
+                            <p>{getConstant(key)}: {drawerData[key]}</p>
                         )
-                    }
-                    return (
-                        <p>{getConstant(key)}: {drawerData[key]}</p>
-                    )
-                })}
-            </Drawer>
+                    })}
+                </Drawer>
+            </div>
+            
         </div>
     )
     

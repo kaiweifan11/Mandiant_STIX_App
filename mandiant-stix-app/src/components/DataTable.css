@@ -2,8 +2,14 @@
     cursor: pointer;
 }
 
-.data-table-search {
-    margin-bottom: 20px;
+.header {
+    width: 50%;
+    display: inline-block;
+}
+
+.logo {
+    width: 200px;
+    text-align: right;
 }
 
 .second-title {
