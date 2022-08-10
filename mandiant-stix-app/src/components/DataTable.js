@@ -50,11 +50,22 @@ const DataTable = (props) => {
         setFilteredData(temp);
     }
 
+    const renderKillPhase = (kill_chain_phases) =>{
+        return kill_chain_phases.map((phase) =>{
+            return(
+                <>
+                    <p>{getConstant('kill_chain_name')}: {phase.kill_chain_name}</p>
+                    <p>{getConstant('phase_name')}: {phase.phase_name}</p>
+                </>
+            )
+        })
+    }
+
     return(
         <div key='data-table'>
             <Title level={2}>Mandiant Report on APT1</Title>
             <DataTableSearch data={dataSource} searchByKeyword={searchByKeyword}/>
-            <Title level={5}>Please use the column headers to filter the data or tap on the rows to view details</Title>
+            <Title className='second-title' level={5}>Please use the column headers to filter the data or tap on the rows to view details</Title>
             <Table
                 columns={getColumns(filteredData)}
                 dataSource={filteredData}
@@ -68,6 +79,13 @@ const DataTable = (props) => {
 
             <Drawer title="Details" placement="right" onClose={onClose} visible={drawerVisible} width={'40%'}>
                 {Object.keys(drawerData).map((key)=>{
+                    console.log('key', key)
+                    console.log('drawerData[key]', drawerData[key])
+                    if(key === 'kill_chain_phases'){
+                        return(
+                            renderKillPhase(drawerData[key])
+                        )
+                    }
                     return (
                         <p>{getConstant(key)}: {drawerData[key]}</p>
                     )

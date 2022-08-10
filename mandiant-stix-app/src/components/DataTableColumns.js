@@ -44,7 +44,7 @@ const getColumns = (data) =>{
             //sorter: (a, b) => a.name.length - b.name.length,
         },
         {
-            title: 'Kill Chain Phrases',
+            title: 'Kill Chain Phases',
             dataIndex: 'kill_chain_phases',
             key: 'kill_chain_phases',
             render: (kill_chain_phases) => {

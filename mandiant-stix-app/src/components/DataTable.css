@@ -1,3 +1,11 @@
 .mouse-over {
     cursor: pointer;
 }
+
+.data-table-search {
+    margin-bottom: 20px;
+}
+
+.second-title {
+    margin-top: 10px;
+}
