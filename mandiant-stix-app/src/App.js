@@ -1,36 +1,34 @@
 import { useEffect } from 'react';
-import useGetReports from './hooks/useGetReports'
-/*function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}*/
+import DataTable from './components/DataTable';
+import useGetReports from './hooks/useGetReports';
 
 const App = () => {
   const {getMandiantReport, reportData} = useGetReports();
+  const data = [
+    {
+      key: '1',
+      name: 'John Brown',
+     
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+    },
+    
+  ];
 
   useEffect(() => {
-    if(reportData === {})
-		getMandiantReport();
-	}, [getMandiantReport, reportData]);
+    if(reportData === null) getMandiantReport();
+    else console.log('reportData', JSON.stringify(reportData))
+  }, [getMandiantReport, reportData]);
+
 
   return (
-    <div>Hello World</div>
+    <div>
+      <div>Hello World</div>
+      <DataTable data={reportData}/>
+    </div>
+    
   );
 }
 
