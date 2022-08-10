@@ -1,31 +1,18 @@
 import { useEffect } from 'react';
 import DataTable from './components/DataTable';
 import useGetReports from './hooks/useGetReports';
+import './App.css';
 
 const App = () => {
   const {getMandiantReport, reportData} = useGetReports();
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-     
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-    },
-    
-  ];
 
   useEffect(() => {
+    // Get report data by calling the hook
     if(reportData === null) getMandiantReport();
-    else console.log('reportData', JSON.stringify(reportData))
   }, [getMandiantReport, reportData]);
 
-
   return (
-    <div>
-      <div>Hello World</div>
+    <div className='app'>
       <DataTable data={reportData}/>
     </div>
     

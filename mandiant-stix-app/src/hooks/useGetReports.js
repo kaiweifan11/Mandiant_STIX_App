@@ -7,15 +7,17 @@ export default function useGetReports() {
 
 	const getMandiantReport = useCallback(
 		async () => {
-			setIsLoading(true);
 			try {
-				axios.get(`https://oasis-open.github.io/cti-documentation/examples/example_json/apt1.json`)
-				.then(res => {
-					const data = res.data;
-					if(data){
-						setReportData(data.objects);
-					}
-				})
+				if(!isLoading){
+					setIsLoading(true);
+					axios.get(`https://oasis-open.github.io/cti-documentation/examples/example_json/apt1.json`)
+					.then(res => {
+						const data = res.data;
+						if(data){
+							setReportData(data.objects);
+						}
+					})
+				}
 			} catch (err) {
 				console.log(err);
 				setReportData({});
