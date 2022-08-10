@@ -9,7 +9,7 @@
 
 .logo {
     width: 200px;
-    text-align: right;
+    float: right;
 }
 
 .second-title {
