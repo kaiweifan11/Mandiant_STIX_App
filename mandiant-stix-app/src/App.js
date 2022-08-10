@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useGetReports from './hooks/useGetReports'
 /*function App() {
   return (
@@ -21,9 +22,12 @@ import useGetReports from './hooks/useGetReports'
 }*/
 
 const App = () => {
-  const {getMandiantReport} = useGetReports();
+  const {getMandiantReport, reportData} = useGetReports();
 
-  getMandiantReport();
+  useEffect(() => {
+    if(reportData === {})
+		getMandiantReport();
+	}, [getMandiantReport, reportData]);
 
   return (
     <div>Hello World</div>

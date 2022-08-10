@@ -2,29 +2,29 @@ import { useCallback, useState } from 'react';
 import axios from 'axios';
 
 export default function useGetReports() {
-	
+	const [reportData, setReportData] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getMandiantReport = useCallback(
 		async () => {
 			// TODO: destructure ibxs, region, accessCategory, page, pageSize for server-side filtering
 			setIsLoading(true);
-			axios.get(`https://jsonplaceholder.typicode.com/users`)
-			.then(res => {
-			  const persons = res.data;
-			  //this.setState({ persons });
-			  console.log('persons', persons);
-			})
-
 			try {
-				isLoading(false);
+				axios.get(`https://oasis-open.github.io/cti-documentation/examples/example_json/apt1.json`)
+				.then(res => {
+					const data = res.data;
+					//this.setState({ persons });
+					console.log('data', data);
+					setReportData(data);
+				})
 			} catch (err) {
 				console.log(err);
+				setReportData({});
 			}
 			setIsLoading(false);
 		},
-		[isLoading]
+		[]
 	);
 
-	return { getMandiantReport };
+	return { getMandiantReport, reportData, isLoading };
 }
